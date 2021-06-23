@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{name}}
+    <p v-html="msg1"></p>
+    <p v-text="msg2"></p>
+
+    <ul>
+        <li v-for="item in books">{{item}}</li>
+    </ul>
+    <div>
+        计数:
+        <button v-on:click="counter--">-</button>
+        {{counter}}
+        <button @click="counter++">+</button>
+        <button v-on:click="addFunction"> ++ </button>
+    </div>
+</div>
+<div id="app1"></div>
+<script src="./js/vue.js"></script>
+<script>
+    const app = new Vue({
+        // 用于挂载要管理的元素
+        el: '#app',
+        data: {
+            name: '西张明-辉',
+            msg1: '<a href="https://cn.vuejs.org">初学vue</a>',
+            msg2: '初学vue',
+            books: ['祖麒麟', '祖龙', '元凤', '洪荒'],
+            counter: 0
+        },
+        methods: {
+            addFunction(){
+                this.counter+=2
+            }
+        }
+    });
+</script>
+</body>
+</html>

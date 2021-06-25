@@ -2,24 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>vue基础第一讲</title>
+    <style>
+        .active{
+            border: 3px solid red;
+            height: 80px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    {{name}}
-    <p v-html="msg1"></p>
-    <p v-text="msg2"></p>
+    <h1>
+        <center>{{name}}</center>
+    </h1>
 
-    <ul>
-        <li v-for="item in books">{{item}}</li>
-    </ul>
     <div>
-        计数:
-        <button v-on:click="counter--">-</button>
-        {{counter}}
-        <button @click="counter++">+</button>
-        <button v-on:click="addFunction"> ++ </button>
+        <b>v-html 可以嵌套标签</b>
+        <p v-html="msg1"></p>
+
+        <b>v-text的区别是纯文本</b>
+        <p v-text="msg2"></p>
     </div>
+    <div>
+        <b> v-on的使用 可以简写为@ </b>
+        <p>
+            <button @dblclick="counter++">双击事件</button>
+            计数:
+            <button v-on:click="counter--">-</button>
+            <span>{{counter}}</span>
+            <button @click="add">+</button>
+        </p>
+    </div>
+    <div>
+        v-bind的使用示例
+        <img v-bind:src="imgSrc" alt="gaga" :title="name" :class="{active: isActive}">
+
+        <img :src="imgSrc" alt="" :title="msg2" class="active">
+    </div>
+
+    <div>
+        <ul>
+            <li v-for="(item, index) in books" v-bind:title="item">{{item}}{{index}}</li>
+        </ul>
+    </div>
+
+
 </div>
 <div id="app1"></div>
 <script src="./js/vue.js"></script>
@@ -29,14 +56,16 @@
         el: '#app',
         data: {
             name: '西张明-辉',
-            msg1: '<a href="https://cn.vuejs.org">初学vue</a>',
-            msg2: '初学vue',
+            msg1: '<a href="https://cn.vuejs.org">v-html标签</a>',
+            msg2: 'v-text标签',
             books: ['祖麒麟', '祖龙', '元凤', '洪荒'],
-            counter: 0
+            counter: 0,
+            imgSrc: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg',
+            isActive: true
         },
         methods: {
-            addFunction(){
-                this.counter+=2
+            add:function() {
+                this.counter += 2
             }
         }
     });
